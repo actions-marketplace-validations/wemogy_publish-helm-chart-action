@@ -1,0 +1,36 @@
+name: Publish Helm Chart (wemogy)
+author: wemogy
+description: Publishes Helm Charts to the wemogy Helm repository
+branding:
+  icon: "upload-cloud"
+  color: "blue"
+
+inputs:
+  name:
+    required: true
+    description: "Name of the Helm Chart"
+  path:
+    required: true
+    description: "Path to the packaged Helm Chart"
+  token:
+    required: true
+    description: "Access Token to the Helm Git repository"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure Git
+      shell: bash
+      run: |
+        git clone https://$GITHUB_ACTOR:${{ inputs.token }}@github.com/wemogy/helm.git
+
+    - name: Commit and push
+      shell: bash
+      run: |
+        cp ${{ inputs.path }} helm/charts
+        cd helm
+        git config user.name $GITHUB_ACTOR
+        git config user.email $GITHUB_ACTOR@users.noreply.github.com
+        git add .
+        git commit -m "New ${{ inputs.name }} release
+        git push
