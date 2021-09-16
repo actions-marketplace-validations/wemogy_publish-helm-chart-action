@@ -6,7 +6,7 @@ A GitHub Action to publish Helm Charts to the wemogy Helm repository
 
 ```yaml
 - name: Publish Helm Chart
-  uses: wemogy/publish-helm-chart-action@1.0.0
+  uses: wemogy/publish-helm-chart-action@1.0.1
   with:
     name: wemogy-demo
     path: env/helm/wemogy-demo/wemogy-demo-1.0.0.tgz
