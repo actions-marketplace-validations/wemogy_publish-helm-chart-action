@@ -24,7 +24,7 @@ runs:
     - name: Commit and push
       shell: bash
       run: |
-        $fileName=$(echo ${{ inputs.path }} | sed "s/.*\///")
+        fileName=$(echo ${{ inputs.path }} | sed "s/.*\///")
         cp ${{ inputs.path }} helm/charts
         cd helm
         git config user.name $GITHUB_ACTOR
